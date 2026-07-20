@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:todo_app/features/auth/presentation/screens/tooglePage.dart';
 import 'package:todo_app/firebase_options.dart';
 
 void main() {
@@ -10,10 +11,8 @@ void main() {
 
 class TodoApp extends StatelessWidget {
   const TodoApp({super.key});
-
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(debugShowCheckedModeBanner: false,
-     home: Scaffold());
+    return MaterialApp(debugShowCheckedModeBanner: false, home: Tooglepage());
   }
 }
