@@ -7,4 +7,5 @@ abstract class AuthRepo {
   Future<void> deleteAccount();
   Future<void> logout();
   Future<AppUser?> getCurrentUser();
+  Future<AppUser?> signInWithGoogle();
 }
