@@ -1,19 +1,19 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:todo_app/features/auth/data/firebase_auth_repo.dart';
 import 'package:todo_app/features/auth/domain/entities/app_user.dart';
+import 'package:todo_app/features/auth/domain/repo/auth_repo.dart';
 import 'package:todo_app/features/auth/presentation/cubit/auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
-  final FirebaseAuthRepo firebaseAuthRepo;
+  final AuthRepo _authRepo;
   AppUser? _currentUser;
-  AuthCubit({required this.firebaseAuthRepo}) : super(AuthInit());
+  AuthCubit(this._authRepo) : super(AuthInit());
 
   AppUser? get currentUser => _currentUser;
 
   void checkAuth() async {
     emit(AuthLoading());
 
-    final AppUser? user = await firebaseAuthRepo.getCurrentUser();
+    final AppUser? user = await _authRepo.getCurrentUser();
     if (user != null) {
       _currentUser = user;
       emit(Authenticate(appUser: user));
@@ -25,7 +25,7 @@ class AuthCubit extends Cubit<AuthState> {
   Future<void> login(String email, String pass) async {
     emit(AuthLoading());
     try {
-      final user = await firebaseAuthRepo.loginWithEmailPassword(email, pass);
+      final user = await _authRepo.loginWithEmailPassword(email, pass);
       if (user != null) {
         _currentUser = user;
         emit(Authenticate(appUser: user));
@@ -40,10 +40,7 @@ class AuthCubit extends Cubit<AuthState> {
   Future<void> register(String email, String pass) async {
     emit(AuthLoading());
     try {
-      final user = await firebaseAuthRepo.registerWithEmailPassword(
-        email,
-        pass,
-      );
+      final user = await _authRepo.registerWithEmailPassword(email, pass);
       if (user != null) {
         _currentUser = user;
         emit(Authenticate(appUser: user));
@@ -57,13 +54,19 @@ class AuthCubit extends Cubit<AuthState> {
 
   Future<void> logout() async {
     emit(AuthLoading());
-    await firebaseAuthRepo.logout();
-    emit(UnAuthenticate());
+
+    try {
+      print("Logout cubit method");
+      await _authRepo.logout();
+      emit(UnAuthenticate());
+    } catch (e) {
+      emit(AuthError(errorMsg: e.toString()));
+    }
   }
 
   Future<String> forgetPassword(String email) async {
     try {
-      final msg = await firebaseAuthRepo.resetAccount(email);
+      final msg = await _authRepo.resetAccount(email);
       return msg;
     } catch (e) {
       return e.toString();
@@ -73,8 +76,7 @@ class AuthCubit extends Cubit<AuthState> {
   Future<void> deleteAccount() async {
     emit(AuthLoading());
     try {
-      await firebaseAuthRepo.deleteAccount();
-      await firebaseAuthRepo.logout();
+      await _authRepo.deleteAccount();
       emit(UnAuthenticate());
     } catch (e) {
       emit(AuthError(errorMsg: e.toString()));

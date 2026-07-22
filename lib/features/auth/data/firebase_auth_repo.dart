@@ -26,12 +26,12 @@ class FirebaseAuthRepo implements AuthRepo {
           .createUserWithEmailAndPassword(email: email, password: password);
       final user = userCredential.user!;
       final doc = await _firestore.collection('users').doc(user.uid).get();
-      if(!doc.exists){
-         await _firestore.collection('users').doc(user.uid).set({
-        'email': user.email,
-      });
+      if (!doc.exists) {
+        await _firestore.collection('users').doc(user.uid).set({
+          'email': user.email,
+        });
       }
-     
+
       return AppUser(email: email, uid: userCredential.user!.uid);
     } catch (e) {
       throw Exception("Signup Failed: $e");
@@ -93,8 +93,8 @@ class FirebaseAuthRepo implements AuthRepo {
   @override
   Future<void> logout() async {
     try {
-      await GoogleSignIn.instance.signOut();
       await _auth.signOut();
+      print("Log out in firebase auth");
     } catch (e) {
       throw Exception("Logout Failed: $e");
     }

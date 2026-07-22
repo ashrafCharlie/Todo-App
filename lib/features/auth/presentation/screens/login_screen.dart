@@ -35,7 +35,6 @@ class _LoginScreenState extends State<LoginScreen> {
     final resetEmail = resetEmailController.text.trim();
     if (resetEmail.isNotEmpty) {
       final msg = await authcubit.forgetPassword(resetEmail);
-      print(msg);
       if (msg == "Reset link send succesful") {
         mySnacBar(context, msg);
         resetEmailController.clear();
@@ -46,6 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
       mySnacBar(context, "Enter an email...");
     }
   }
+
   void login() {
     final email = emailController.text.trim();
     final password = pwController.text.trim();
@@ -91,7 +91,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   padding: EdgeInsetsGeometry.only(right: 25.0),
                   child: ResetpasswordBox(
                     resetEmailController: resetEmailController,
-                    onPressed: () => forgetPassword(),
+                    onPressed: () {
+                      forgetPassword();
+                      Navigator.pop(context);
+                    },
                   ),
                 ),
               ),
