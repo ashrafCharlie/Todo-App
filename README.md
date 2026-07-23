@@ -1,17 +1,28 @@
-# todo_app
+#  Todo App
 
-A new Flutter project.
+A Flutter Todo App built with Firebase and BLoC state management.
 
-## Getting Started
+This app allows users to securely manage their daily tasks with Firebase Authentication and Cloud Firestore. Users can create an account, sign in, add, edit, update, and delete todos, while all changes are synced in real time.
 
-This project is a starting point for a Flutter application.
+## Features
 
-A few resources to get you started if this is your first Flutter project:
+- Email & Password Authentication
+- Google Sign-In
+- Password Reset
+- Add, Edit, and Delete Todos
+- Mark Todos as Completed
+- Real-time Firestore Synchronization
+- BLoC State Management
+- Feature-First + Clean Architecture
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+## Tech Stack
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Flutter
+- Firebase Authentication
+- Cloud Firestore
+- flutter_bloc
+- Equatable
+
+## Demo
+
+Demo: *()*
