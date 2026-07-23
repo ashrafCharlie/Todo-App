@@ -54,66 +54,72 @@ class _SignupScreenState extends State<SignupScreen> {
             mySnacBar(context, state.errorMsg);
           }
         },
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(Icons.create, size: 200, color: Colors.blueAccent),
-              Text(
-                "Create an account",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0),
-              ),
-              const SizedBox(height: 20.0),
-
-              const SizedBox(height: 15.0),
-
-              MyTextfield(controller: emailController, hintText: "Email"),
-              const SizedBox(height: 15.0),
-
-              MyTextfield(
-                controller: pwController,
-                hintText: "Password",
-                obscureText: true,
-              ),
-              const SizedBox(height: 15.0),
-
-              MyTextfield(
-                controller: confirmPwController,
-                hintText: "Confirm Password",
-                obscureText: true,
-              ),
-              const SizedBox(height: 25.0),
-
-          
-              MyButton(
-                    buttonText: "Sign Up",
-                    onTap: () {
-                      register();
-                    },
-                  ),
-              
-              SizedBox(height: 15.0),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text("Already have an Account? "),
-                  GestureDetector(
-                    onTap: widget.togglepages,
-                    child: Text(
-                      "Login",
-                      style: TextStyle(
-                        color: Colors.blue,
-                        fontWeight: FontWeight.bold,
+        child: SingleChildScrollView(
+          child: SafeArea(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(Icons.create, size: 150, color: Colors.blueAccent),
+                Text(
+                  "Create an account",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0),
+                ),
+                const SizedBox(height: 20.0),
+            
+                const SizedBox(height: 15.0),
+            
+                MyTextfield(controller: emailController, hintText: "Email"),
+                const SizedBox(height: 15.0),
+            
+                MyTextfield(
+                  controller: pwController,
+                  hintText: "Password",
+                  obscureText: true,
+                ),
+                const SizedBox(height: 15.0),
+            
+                MyTextfield(
+                  controller: confirmPwController,
+                  hintText: "Confirm Password",
+                  obscureText: true,
+                ),
+                const SizedBox(height: 25.0),
+            
+                MyButton(
+                  buttonText: "Sign Up",
+                  onTap: () {
+                    register();
+                  },
+                ),
+            
+                SizedBox(height: 15.0),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("Already have an Account? "),
+                    GestureDetector(
+                      onTap: widget.togglepages,
+                      child: Text(
+                        "Login",
+                        style: TextStyle(
+                          color: Colors.blue,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 15.0),
-              CustomDivider("Or"),
-
-              ContinueWithGoogle(onTap: () {}, text: "Continue With Google"),
-            ],
+                  ],
+                ),
+                SizedBox(height: 15.0),
+                CustomDivider("Or"),
+            
+                ContinueWithGoogle(
+                  onTap: () {
+                    context.read<AuthCubit>().googleLogin();
+                  },
+                  text: "Continue With Google",
+                ),
+              ],
+            ),
           ),
         ),
       ),

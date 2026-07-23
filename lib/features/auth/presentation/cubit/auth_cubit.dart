@@ -56,7 +56,6 @@ class AuthCubit extends Cubit<AuthState> {
     emit(AuthLoading());
 
     try {
-      print("Logout cubit method");
       await _authRepo.logout();
       emit(UnAuthenticate());
     } catch (e) {
@@ -81,6 +80,21 @@ class AuthCubit extends Cubit<AuthState> {
     } catch (e) {
       emit(AuthError(errorMsg: e.toString()));
       emit(UnAuthenticate());
+    }
+  }
+
+  Future<void> googleLogin() async {
+    try {
+      final user = await _authRepo.signInWithGoogle();
+      if (user != null) {
+        _currentUser = user;
+        emit(Authenticate(appUser: user));
+      } else {
+        emit(AuthError(errorMsg: "User not found!"));
+      }
+    } catch (e) {
+      print(e);
+      emit(AuthError(errorMsg: e.toString()));
     }
   }
 }

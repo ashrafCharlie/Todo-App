@@ -59,24 +59,19 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocListener<AuthCubit, AuthState>(
-        listener: (context, state) {
-          if (state is AuthError) {
-            mySnacBar(context, state.errorMsg);
-          }
-        },
-        child: Center(
+      body: SingleChildScrollView(
+        child: SafeArea(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(Icons.flutter_dash, size: 200, color: Colors.blue),
+              Icon(Icons.flutter_dash, size: 150, color: Colors.blue),
               SizedBox(height: 10),
               Text(
                 "Hey, Welcome Back",
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0),
               ),
               const SizedBox(height: 20.0),
-
+      
               MyTextfield(controller: emailController, hintText: "Email"),
               const SizedBox(height: 20.0),
               MyTextfield(
@@ -124,7 +119,12 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               SizedBox(height: 15.0),
               CustomDivider("Or"),
-              ContinueWithGoogle(onTap: () {}, text: "Continue with Google"),
+              ContinueWithGoogle(
+                onTap: () {
+                  context.read<AuthCubit>().googleLogin();
+                },
+                text: "Continue with Google",
+              ),
             ],
           ),
         ),
