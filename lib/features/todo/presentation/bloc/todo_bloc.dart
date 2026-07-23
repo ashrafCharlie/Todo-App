@@ -17,7 +17,7 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
             id: '',
           ),
         );
-        emit(TodoSuccessState());
+        // emit(TodoSuccessState());
       } catch (e) {
         emit(TodoErrorState(errorMsg: e.toString()));
       }
@@ -43,6 +43,14 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
     on<TodoUpdateEvent>((event, emit) async {
       try {
         await _todoRepo.updateTodo(event.todo);
+      } catch (e) {
+        emit(TodoErrorState(errorMsg: e.toString()));
+      }
+    });
+
+    on<TodoDeleteEvent>((event, emit) async {
+      try {
+        await _todoRepo.deleteTodo(event.id);
       } catch (e) {
         emit(TodoErrorState(errorMsg: e.toString()));
       }

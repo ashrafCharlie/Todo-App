@@ -16,17 +16,15 @@ class MyDrawer extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ListTile(
-              title: TextButton(
-                onPressed: onPressed,
-                child: Row(children: [
-Icon(Icons.logout,size: 35,),
-Text("Logout",style: TextStyle(fontSize: 30),),
-                ],)
-              ),
-            ),
-            ListTile(
               title: DeleteAccountdailog(onPressed: onPressedDelete,),
             ),
+             ListTile(
+              title: ElevatedButton.icon(
+                onPressed: onPressed,
+                icon: Icon(Icons.logout),
+                label: Text("Logout"),
+              ),
+                         ),
           ],
         ),
       );

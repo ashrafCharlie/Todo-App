@@ -1,12 +1,12 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:todo_app/features/auth/data/firebase_auth_repo.dart';
+import 'package:todo_app/features/auth/data/repo/firebase_auth_repo.dart';
 import 'package:todo_app/features/auth/domain/repo/auth_repo.dart';
 import 'package:todo_app/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:todo_app/features/auth/presentation/cubit/auth_state.dart';
 import 'package:todo_app/features/auth/presentation/screens/tooglePage.dart';
-import 'package:todo_app/features/todo/data/firebase_todo_repo.dart';
+import 'package:todo_app/features/todo/data/repo/firebase_todo_repo.dart';
 import 'package:todo_app/features/todo/domain/repo/todo_repo.dart';
 import 'package:todo_app/features/todo/presentation/bloc/todo_bloc.dart';
 import 'package:todo_app/features/todo/presentation/bloc/todo_event.dart';

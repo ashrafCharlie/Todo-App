@@ -14,4 +14,7 @@ class TodoUpdateEvent extends TodoEvent {
   TodoUpdateEvent({required this.todo});
 }
 
-class TodoDeleteEvent extends TodoEvent {}
+class TodoDeleteEvent extends TodoEvent {
+  final String id;
+  TodoDeleteEvent({required this.id});
+}
