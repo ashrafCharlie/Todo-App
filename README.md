@@ -25,4 +25,6 @@ This app allows users to securely manage their daily tasks with Firebase Authent
 
 ## Demo
 
-Demo: *()*
+https://github.com/user-attachments/assets/8790fe9f-0a07-434e-9bfd-e04733882232
+
+
